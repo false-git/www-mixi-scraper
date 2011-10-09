@@ -11,13 +11,14 @@ sub scrape {
 
   my %scraper;
   $scraper{entries} = scraper {
+    process 'div>p.name',
+      name => 'TEXT';
     process 'div>div>p',
       time => 'TEXT';
     process 'div>p.title>a',
       subject => 'TEXT',
-      link    => '@href',
-      string => 'TEXT';
-    result qw( string subject link time );
+      link    => '@href';
+    result qw( name subject link time );
   };
 
   $scraper{list} = scraper {
